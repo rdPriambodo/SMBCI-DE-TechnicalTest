@@ -72,6 +72,19 @@ select * from SMBCI_DE_TEST_STG.dbo.customer_staging;
 EXEC load_dim_customer;
 select * from dim_customer;
 
+-- test kombinasi sdc1 dan sdc2
+UPDATE SMBCI_DE_TEST_STG.dbo.customer_staging
+SET  monthly_fee = 200000.00
+where customer_id = 7;
+
+UPDATE SMBCI_DE_TEST_STG.dbo.customer_staging
+SET email = 'santoso.budi@example.com'
+where customer_id = 1;
+
+select * from SMBCI_DE_TEST_STG.dbo.customer_staging;
+EXEC load_dim_customer_kombinasi_sdc1_sdc2;
+select * from dim_customer;
+
 -- error handling data duplikat
 INSERT INTO SMBCI_DE_TEST_STG.dbo.customer_staging (
     customer_id,
